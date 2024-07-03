@@ -1,0 +1,37 @@
+Running the server and hitting the list api and task api
+##########################################################################################
+API Requests
+##########################################################################################
+C:\Users\128405>curl -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/v1/products/list/ -d "{\"pages\":1}"
+{"task_uuid":"e853f305-ab52-45d3-8268-b83ca500adcc"}
+C:\Users\128405>curl -H "Content-Type: application/json" -X GET http://127.0.0.1:8000/api/v1/products/tasks/e853f305-ab52-45d3-8268-b83ca500adcc
+{"status":"Success","count":24,"data":[]}
+C:\Users\128405>curl -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/v1/products/list/ -d "{}"
+{"task_uuid":"19dc64d7-27d8-43f9-9cf7-943af2bb093e"}
+C:\Users\128405>curl -H "Content-Type: application/json" -X GET http://127.0.0.1:8000/api/v1/products/tasks/19dc64d7-27d8-43f9-9cf7-943af2bb093e
+{"status":"Success","count":24,"data":[]}
+C:\Users\128405>curl -H "Content-Type: application/json" -X POST http://127.0.0.1:8000/api/v1/products/list/ -d "{\"pages\":10}"
+{"task_uuid":"659da1f1-fcda-4e72-aa71-993e55d333ad"}
+C:\Users\128405>curl -H "Content-Type: application/json" -X GET http://127.0.0.1:8000/api/v1/products/tasks/19dc64d7-27d8-43f9-9cf7-943af2bb093f
+{"status":"No such task","count":0,"data":[]}
+##########################################################################################
+##########################################################################################
+Web Server Console Output
+##########################################################################################
+(venv) C:\Users\128405\Programming\Assignment-Atlys>uvicorn src.main:app
+←[32mINFO←[0m:     Started server process [←[36m5768←[0m]
+←[32mINFO←[0m:     Waiting for application startup.
+←[32mINFO←[0m:     Application startup complete.
+←[32mINFO←[0m:     Uvicorn running on ←[1mhttp://127.0.0.1:8000←[0m (Press CTRL+C to quit)
+←[32mINFO←[0m:     127.0.0.1:65011 - "←[1mPOST /api/v1/products/list/ HTTP/1.1←[0m" ←[32m200 OK←[0m
+←[32mINFO←[0m:     Getting products for request id: e853f305-ab52-45d3-8268-b83ca500adcc
+←[32mINFO←[0m:     Fetched 24 products for request id: e853f305-ab52-45d3-8268-b83ca500adcc
+←[32mINFO←[0m:     127.0.0.1:65020 - "←[1mGET /api/v1/products/tasks/e853f305-ab52-45d3-8268-b83ca500adcc HTTP/1.1←[0m" ←[32m200 OK←[0m
+←[32mINFO←[0m:     127.0.0.1:65032 - "←[1mPOST /api/v1/products/list/ HTTP/1.1←[0m" ←[32m200 OK←[0m
+←[32mINFO←[0m:     Getting products for request id: 19dc64d7-27d8-43f9-9cf7-943af2bb093e
+←[32mINFO←[0m:     Fetched 24 products for request id: 19dc64d7-27d8-43f9-9cf7-943af2bb093e
+←[32mINFO←[0m:     127.0.0.1:65039 - "←[1mGET /api/v1/products/tasks/19dc64d7-27d8-43f9-9cf7-943af2bb093e HTTP/1.1←[0m" ←[32m200 OK←[0m
+←[32mINFO←[0m:     127.0.0.1:65048 - "←[1mPOST /api/v1/products/list/ HTTP/1.1←[0m" ←[32m200 OK←[0m
+←[32mINFO←[0m:     Getting products for request id: 659da1f1-fcda-4e72-aa71-993e55d333ad
+←[32mINFO←[0m:     Fetched 240 products for request id: 659da1f1-fcda-4e72-aa71-993e55d333ad
+##########################################################################################
